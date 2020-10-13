@@ -1,0 +1,64 @@
+<div class="factura">
+  <h1>Facturas</h1>
+
+  <div class="factura__grid">
+    <dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+    </dx-load-panel>
+    <dx-data-grid id="gridContainer" [dataSource]="facturas" [showBorders]="true" [columnAutoWidth]="true"
+      [masterDetail]="{ enabled: true, template: 'detail' }" keyExpr="idFactura">
+
+      <dxo-paging [pageSize]="6" [pageIndex]="0">
+      </dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true" [allowedPageSizes]="[3, 5, 6]"
+        [showInfo]="true" infoText="Page #{0}. Total: {1} ({2} items)">
+      </dxo-pager>
+
+      <dxo-filter-row [visible]="showFilterRow"></dxo-filter-row>
+      <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+      <dxi-column dataField="nombreCliente" [width]="250" caption="Cliente"></dxi-column>
+      <dxi-column dataField="fecha" [width]="250" caption="Fecha Compra" dataType="date"></dxi-column>
+      <dxi-column dataField="cantidadProductos" [width]="140" caption="Cantida Productos"></dxi-column>
+      <dxi-column dataField="valorTotal" [width]="110" caption="Valor Total" format="currency"></dxi-column>
+
+      <div *dxTemplate="let factura of 'detail'">
+        <dx-data-grid [dataSource]="factura.data.listaDetalle" [showBorders]="true" [columnAutoWidth]="true"
+          (onRowUpdated)="onRowUpdated($event)">
+
+          <dxo-paging [pageSize]="3" [pageIndex]="0">
+          </dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true" [showInfo]="true"
+            infoText="Page #{0}. Total: {1} ({2} items)">
+          </dxo-pager>
+
+          <dxo-editing mode="row" [allowUpdating]="true">
+            <dxo-popup title="Producto Info" [showTitle]="true" [width]="700" [height]="250"
+              [position]="{ my: 'center', at: 'center', of: 'window' }">
+            </dxo-popup>
+
+            <dxo-texts saveRow="Guardar" cancelRow="Cancelar" editRow="Editar">
+            </dxo-texts>
+          </dxo-editing>
+
+          <dxi-column dataField="nombreProducto" [allowEditing]="false"></dxi-column>
+          <dxi-column dataField="precio" format="currency"></dxi-column>
+          <dxi-column dataField="observaciones"></dxi-column>
+
+          <dxo-summary>
+            <dxi-total-item column="precio" summaryType="sum">
+              <dxo-value-format format="currency" [precision]="2"></dxo-value-format>
+            </dxi-total-item>
+            <dxi-total-item column="nombreProducto" summaryType="count"></dxi-total-item>
+          </dxo-summary>
+        </dx-data-grid>
+      </div>
+    </dx-data-grid>
+  </div>
+</div>

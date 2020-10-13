@@ -1,0 +1,99 @@
+<div class="home">
+  <dx-responsive-box
+        class="home__container"
+        singleColumnScreen="sm"
+        [(screenByWidth)]="screen">
+        <dxi-row [ratio]="1"></dxi-row>
+        <dxi-row [ratio]="1" screen="xs"></dxi-row>
+        <dxi-row [ratio]="1"></dxi-row>
+
+        <dxi-col [ratio]="1"></dxi-col>
+        <dxi-col [ratio]="1" screen="lg"></dxi-col>
+        <dxi-col [ratio]="1"></dxi-col>
+        <dxi-item>
+            <dxi-location
+                [row]="1"
+                [col]="0"
+                screen="lg"
+            ></dxi-location>
+            <dxi-location
+                [row]="1"
+                [col]="0"
+                screen="sm"
+            ></dxi-location>
+            <div *dxTemplate class="home__clientes">
+                <div class="item">
+                  <h3>Clientes</h3>
+                  <lu>
+                    <li>Agregar clientes</li>
+                    <li>Editar clientes</li>
+                    <li>Eliminar clientes</li>
+                  </lu>
+                </div>
+
+                <dx-button
+                    icon="fas fa-user-cog"
+                    text="Administrar"
+                    class="home__clientesBtn"
+                    (onClick)="goToPage('clientes')">
+                </dx-button>
+            </div>
+        </dxi-item>
+        <dxi-item>
+            <dxi-location
+                [row]="1"
+                [col]="1"
+                screen="lg"
+            ></dxi-location>
+            <dxi-location
+                [row]="2"
+                [col]="0"
+                screen="sm"
+            ></dxi-location>
+            <div *dxTemplate class="home__facturas">
+                <div class="item">
+                  <h3>Facturas</h3>
+                  <lu>
+                    <li>Editar facturas</li>
+                    <li>Ver Detalle factura</li>
+                  </lu>
+                </div>
+
+                <dx-button
+                    icon="fas fa-file-invoice-dollar"
+                    text="Administrar"
+                    class="home__clientesBtn"
+                    (onClick)="goToPage('facturas')">
+                </dx-button>
+            </div>
+        </dxi-item>
+        <dxi-item>
+            <dxi-location
+                [row]="1"
+                [col]="2"
+                screen="lg"
+            ></dxi-location>
+            <dxi-location
+                [row]="2"
+                [col]="1"
+                screen="sm"
+            ></dxi-location>
+            <div *dxTemplate class="home__productos">
+              <div class="item">
+                <h3>Productos</h3>
+
+                <lu>
+                  <li>Agregar productos</li>
+                  <li>Editar productos</li>
+                </lu>
+              </div>
+              <dx-button
+                  icon="fas fa-shopping-cart"
+                  text="Administrar"
+                  class="home__clientesBtn"
+                  (onClick)="goToPage('productos')">
+              </dx-button>
+            </div>
+        </dxi-item>
+    </dx-responsive-box>
+</div>
