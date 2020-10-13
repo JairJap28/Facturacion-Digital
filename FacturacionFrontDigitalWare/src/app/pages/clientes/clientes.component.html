@@ -1,0 +1,68 @@
+<div class="clientes">
+  <h1>Clientes</h1>
+
+  <div class="clientes__grid">
+    <dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+    </dx-load-panel>
+    <dx-data-grid id="gridContainer" [dataSource]="respuestaCliente" [showBorders]="true" [columnAutoWidth]="true"
+      (onRowInserted)="onRowInserted($event)" (onRowUpdated)="onRowUpdated($event)" (onRowRemoved)="onRowRemoved($event)">
+      <dxo-paging
+        [pageSize]="5"
+        [pageIndex]="0">
+      </dxo-paging>
+      <dxo-pager
+        [showPageSizeSelector]="true"
+        [showNavigationButtons]="true"
+        [allowedPageSizes]="[3, 6, 8]"
+        [showInfo]="true"
+        infoText="Page #{0}. Total: {1} ({2} items)">
+      </dxo-pager>
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true">
+        <dxo-popup title="Cliente Info" [showTitle]="true" [width]="700" [height]="317"
+          [position]="{ my: 'center', at: 'center', of: 'window' }">
+        </dxo-popup>
+        <dxo-texts
+            deleteRow="Eliminar"
+            editRow="Editar"
+            confirmDeleteMessage="¿Seguro que desea eliminar el cliente y sus facturas?">
+        </dxo-texts>
+        <dxo-form>
+          <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+            <dxi-item dataField="primerNombre"></dxi-item>
+            <dxi-item dataField="segundoNombre"></dxi-item>
+            <dxi-item dataField="primerApellido"></dxi-item>
+            <dxi-item dataField="segundoApellido"></dxi-item>
+            <dxi-item dataField="fechaNacimiento" dataType="date">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="cedula">
+              <dxi-validation-rule type="required"></dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+        </dxo-form>
+      </dxo-editing>
+      <dxo-filter-row [visible]="showFilterRow"></dxo-filter-row>
+      <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+      <dxi-column dataField="cedula" [width]="90" caption="Cédula"></dxi-column>
+      <dxi-column dataField="primerNombre" [width]="140" caption="Primer Nombre">
+      </dxi-column>
+      <dxi-column dataField="segundoNombre" [width]="140" caption="Segundo Nombre">
+      </dxi-column>
+      <dxi-column dataField="primerApellido" [width]="140" caption="Primer Apellido">
+      </dxi-column>
+      <dxi-column dataField="segundoApellido" [width]="140" caption="Segundo Apellido">
+      </dxi-column>
+      <dxi-column dataField="fechaNacimiento" alignment="right" dataType="date" [width]="110" caption="Fec. Nacimiento">
+        <dxo-header-filter [dataSource]="respuestaCliente"></dxo-header-filter>
+      </dxi-column>
+    </dx-data-grid>
+  </div>
+</div>

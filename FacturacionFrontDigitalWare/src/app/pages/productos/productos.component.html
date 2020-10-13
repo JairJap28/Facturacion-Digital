@@ -1,0 +1,60 @@
+<div class="productos">
+  <div class="productos__categorias">
+    <h1>Productos</h1>
+    <dx-select-box [items]="respuestaCategorias" placeholder="Categoria" [showClearButton]="true"
+      (onSelectionChanged)="onChangeCategory($event)" displayExpr="text" valueExpr="value">
+    </dx-select-box>
+  </div>
+
+  <div class="productos__grid">
+    <dx-load-panel
+        #loadPanel
+        shadingColor="rgba(0,0,0,0.4)"
+        [(visible)]="loadingVisible"
+        [showIndicator]="true"
+        [showPane]="true"
+        [shading]="true"
+        [closeOnOutsideClick]="false">
+    </dx-load-panel>
+    <dx-data-grid id="gridContainer" [dataSource]="respuestaProductos" [showBorders]="true" [columnAutoWidth]="true"
+      (onRowInserted)="onRowInserted($event)" (onRowUpdated)="onRowUpdated($event)">
+
+      <dxo-paging [pageSize]="6" [pageIndex]="0">
+      </dxo-paging>
+      <dxo-pager [showPageSizeSelector]="true" [showNavigationButtons]="true" [allowedPageSizes]="[3, 5, 6]"
+        [showInfo]="true" infoText="Page #{0}. Total: {1} ({2} items)">
+      </dxo-pager>
+      <dxo-editing mode="popup" [allowUpdating]="true" [allowAdding]="true">
+        <dxo-popup title="Producto Info" [showTitle]="true" [width]="700" [height]="250"
+          [position]="{ my: 'center', at: 'center', of: 'window' }">
+        </dxo-popup>
+        <dxo-texts saveRow="Guardar" cancelRow="Cancelar" editRow="Editar">
+        </dxo-texts>
+        <dxo-form>
+          <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+            <dxi-item dataField="categoria" editorType="dxSelectBox"
+              [editorOptions]="{ items: categoriasText, searchEnabled: true }">
+              <dxi-validation-rule type="required" message="La categoria es obligatoria"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="nombre">
+              <dxi-validation-rule type="required" message="El nombre es obligatorio"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="precio" format="currency">
+              <dxi-validation-rule type="required" message="El precio es obligatori"></dxi-validation-rule>
+            </dxi-item>
+            <dxi-item dataField="cantidad">
+              <dxi-validation-rule type="required" message="La cantidad es obligatoria"></dxi-validation-rule>
+            </dxi-item>
+          </dxi-item>
+        </dxo-form>
+      </dxo-editing>
+      <dxo-filter-row [visible]="showFilterRow"></dxo-filter-row>
+      <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search..."></dxo-search-panel>
+      <dxi-column dataField="categoria" [width]="140" caption="Categoria"></dxi-column>
+      <dxi-column dataField="nombre" [width]="140" caption="Producto"></dxi-column>
+      <dxi-column dataField="precio" [width]="140" caption="Valor Unitario" format="currency"></dxi-column>
+      <dxi-column dataField="cantidad" [width]="140" caption="Cantidad Inventario"></dxi-column>
+    </dx-data-grid>
+  </div>
+</div>

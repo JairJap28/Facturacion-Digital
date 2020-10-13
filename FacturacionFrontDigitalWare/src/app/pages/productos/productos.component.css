@@ -1,0 +1,31 @@
+.productos {
+  padding: 20px;
+}
+
+.productos h1 {
+  font-weight: bold;
+}
+
+.productos__categorias {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.productos__categorias::after{
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color: lightgray;
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+}
+
+.productos__grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}

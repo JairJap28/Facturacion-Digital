@@ -1,0 +1,19 @@
+.factura {
+  padding: 20px;
+}
+
+.factura h1 {
+  font-weight: bold;
+}
+
+.factura__grid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  margin-bottom: 50px;
+}
+
+::ng-deep .dx-master-detail-cell {
+  padding: 10px !important;
+}
